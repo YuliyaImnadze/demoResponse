@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Удалить клиента</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
+</head>
+<body>
+<!--<div th:insert="blocks/header :: header"></div>-->
+<!--<form th:method="DELETE" th:action="@{/api/v1/people/{id}/delete(id=${deletedUser.getId()})}" style="margin-left:32px;">-->
+<form th:method="POST" th:action="@{/api/v1/people/{id}/delete(id=${deletedUser.getId()})}" th:object="${deletedUser}"style="margin-left:32px;">
+    <input type="hidden" name="_method" th:value="delete" >
+    <h5>Вы действительно хотите удалить клиента?</h5>
+    <table class="table table-sm">
+        <!--        style="width: -webkit-fill-available;"-->
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Ник</th>
+            <th scope="col">Возраст</th>
+            <th scope="col">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${deletedUser.getId()}"></td>
+            <td th:text="${deletedUser.getName()}" th:field="*{name}"></td>
+            <td th:text="${deletedUser.getNickname()}"></td>
+            <td th:text="${deletedUser.getAge()}"></td>
+            <td th:text="${deletedUser.getEmail()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="form-group row" style="margin-top:16px;">
+        <div class="col-sm-auto">
+            <a href='/api/v1/people/all'><button type="button" class="btn btn-success">Отменить удаление</button></a>
+            <!--            type="submit"-->
+        </div>
+        <div class="col-sm-auto">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </div>
+    </div>
+
+</form>
+</body>
+</html>
